@@ -20,7 +20,9 @@ function App() {
   const [politicians, setPoliticians] = useState([]);
 
   async function CallPoliticians() {
-    const call = await fetch(`http://localhost:3333/politicians`);
+    const call = await fetch(`http://localhost:3333/politicians`).catch((err) =>
+      console.error(err)
+    );
     const result = await call.json();
     setPoliticians(result);
   }
