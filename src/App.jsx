@@ -1,23 +1,18 @@
-import { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useMemo } from "react";
 import "./App.css";
-/*📌 Milestone 1: Recuperare e visualizzare i dati
-Effettua una chiamata API a
-http://localhost:3333/politicians
+/*
+📌 Milestone 2: Implementare la ricerca ottimizzata
+Aggiungi un campo di ricerca (<input type="text">) sopra la lista dei politici.
+Permetti all’utente di filtrare i risultati in base a nome o biografia (se il testo cercato è incluso). Suggerimento: Creare un array derivato filtrato, che viene aggiornato solo quando cambia la lista di politici o il valore della ricerca.
+❌ Non usare useEffect per aggiornare l’array filtrato.
 
-Salva la risposta in uno stato React (useState).
-
-Mostra i politici in una lista di card, visualizzando almeno le seguenti proprietà:
-
-Nome (name)
-Immagine (image)
-Posizione (position)
-Breve biografia (biography)
-
-Obiettivo: Caricare e mostrare i politici in un’interfaccia chiara e leggibile.*/
+Obiettivo: Migliorare le prestazioni evitando ricalcoli inutili quando il valore della ricerca non cambia.*/
 //creo una variabile di stato come array vuoto per visualizzare le info dopo la chiamata
 
 function App() {
   const [politicians, setPoliticians] = useState([]);
+  ////creo una variabile di stato per visualizzare lo state aggiornato nel campo input
+  const [search, setSearch] = useState("");
 
   async function CallPoliticians() {
     const call = await fetch(`http://localhost:3333/politicians`).catch((err) =>
@@ -31,12 +26,25 @@ function App() {
     CallPoliticians();
   }, []);
 
-  console.log(politicians);
+  //do il nome all'array da filtrare
+  const filterPoliticians = useMemo(() => {}, []);
+
+  /*Permetti all’utente di filtrare i risultati in base a nome o biografia (se il testo cercato è incluso). Suggerimento: Creare un array derivato filtrato, che viene aggiornato solo quando cambia la lista di politici o il valore della ricerca.*/
 
   return (
     <>
-      <div className="container">
-        <div className="col-12">
+      <div className="container m-5">
+        <div className="col-12 ">
+          <div className="row">
+            <div className="col-7">
+              {/* Aggiungi un campo di ricerca (<input type="text">) sopra la lista dei politici.*/}
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+          </div>
           <div className="row d-flex">
             {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
             {politicians.map((p) => {
