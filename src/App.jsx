@@ -28,12 +28,17 @@ function App() {
 
   //do il nome all'array da filtrare
   const filterPoliticians = useMemo(() => {
-    return politicians.map((p) => {
+    return politicians.filter((p) => {
       //destrutturo p cosi è anche più semplice la comprensione del codice
       const { name, biography } = p;
-      return;
+      return (
+        // nel return inserisco le casistiche
+        name.toLowerCase().includes(search.toLowerCase()) ||
+        biography.toLowerCase().includes(search.toLowerCase())
+      );
     });
-  }, []);
+    // come un useEffect anche useMemo vuole il suo array di dipendencies
+  }, [politicians, search]);
 
   /*Permetti all’utente di filtrare i risultati in base a nome o biografia (se il testo cercato è incluso). Suggerimento: Creare un array derivato filtrato, che viene aggiornato solo quando cambia la lista di politici o il valore della ricerca.*/
 
@@ -53,7 +58,7 @@ function App() {
           </div>
           <div className="row d-flex">
             {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
-            {politicians.map((p) => {
+            {filterPoliticians.map((p) => {
               const {
                 id,
                 name,
