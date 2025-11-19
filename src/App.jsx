@@ -31,11 +31,28 @@ function App() {
     CallPoliticians();
   }, []);
 
+  console.log(politicians);
+
   return (
     <>
       <div className="container">
         <div className="row d-flex">
-          <div className="col-12 text-center">ex-react-usememo-politici</div>
+          <div className="col-12 ">
+            {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
+            {politicians.map((p) => {
+              const { id, name, dob, country, party, image } = p;
+              return (
+                <div key={id} className="card">
+                  <img src={image} className="card-img-top " alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">{name}</h5>
+                    <p className="card-text">{country}</p>
+                    <p className="card-text">{dob}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
