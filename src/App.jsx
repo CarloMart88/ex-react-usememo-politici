@@ -1,12 +1,28 @@
 import React, { useState, useEffect, memo, useMemo } from "react";
 import "./App.css";
+// a questo punto creo una componente card
+const Card = ({ p }) => {
+  const { id, name, dob, country, party, image, position, biography } = p;
+  return (
+    <div key={id} className="col-3 m-3 card">
+      <img src={image} className="card-img-top p-2" alt="..." />
+      <div className="card-body">
+        <h5 className="card-title">Name: {name}</h5>
+        <p className="card-text">position: {position}</p>
+        <p className="card-text">country: {country}</p>
+        <p className="card-text">biography: {biography}</p>
+      </div>
+    </div>
+  );
+};
 /*
-📌 Milestone 2: Implementare la ricerca ottimizzata
-Aggiungi un campo di ricerca (<input type="text">) sopra la lista dei politici.
-Permetti all’utente di filtrare i risultati in base a nome o biografia (se il testo cercato è incluso). Suggerimento: Creare un array derivato filtrato, che viene aggiornato solo quando cambia la lista di politici o il valore della ricerca.
-❌ Non usare useEffect per aggiornare l’array filtrato.
+📌 Milestone 3: Ottimizzare il rendering delle card con React.memo
+Attualmente, ogni volta che l’utente digita nella barra di ricerca, tutte le card vengono ri-renderizzate, anche quelle che non sono cambiate.
+Usa React.memo() per evitare il ri-render delle card quando le loro props non cambiano.
+Aggiungi un console.log() dentro il componente Card per verificare che venga renderizzato solo quando necessario.
 
-Obiettivo: Migliorare le prestazioni evitando ricalcoli inutili quando il valore della ricerca non cambia.*/
+Obiettivo: Se la lista filtrata cambia, solo le nuove card devono essere renderizzate, mentre le altre rimangono in memoria senza essere ridisegnate.*/
+
 //creo una variabile di stato come array vuoto per visualizzare le info dopo la chiamata
 
 function App() {
@@ -59,27 +75,7 @@ function App() {
           <div className="row d-flex">
             {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
             {filterPoliticians.map((p) => {
-              const {
-                id,
-                name,
-                dob,
-                country,
-                party,
-                image,
-                position,
-                biography,
-              } = p;
-              return (
-                <div key={id} className="col-3 m-3 card">
-                  <img src={image} className="card-img-top p-2" alt="..." />
-                  <div className="card-body">
-                    <h5 className="card-title">Name: {name}</h5>
-                    <p className="card-text">position: {position}</p>
-                    <p className="card-text">country: {country}</p>
-                    <p className="card-text">biography: {biography}</p>
-                  </div>
-                </div>
-              );
+              return <Card p={p} />;
             })}
           </div>
         </div>
