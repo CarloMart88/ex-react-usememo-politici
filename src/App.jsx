@@ -27,7 +27,13 @@ function App() {
   }, []);
 
   //do il nome all'array da filtrare
-  const filterPoliticians = useMemo(() => {}, []);
+  const filterPoliticians = useMemo(() => {
+    return politicians.map((p) => {
+      //destrutturo p cosi è anche più semplice la comprensione del codice
+      const { name, biography } = p;
+      return;
+    });
+  }, []);
 
   /*Permetti all’utente di filtrare i risultati in base a nome o biografia (se il testo cercato è incluso). Suggerimento: Creare un array derivato filtrato, che viene aggiornato solo quando cambia la lista di politici o il valore della ricerca.*/
 
