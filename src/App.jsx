@@ -36,31 +36,33 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="row d-flex">
-          {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
-          {politicians.map((p) => {
-            const {
-              id,
-              name,
-              dob,
-              country,
-              party,
-              image,
-              position,
-              biography,
-            } = p;
-            return (
-              <div key={id} className="col-6 m-3 card">
-                <img src={image} className="card-img-top p-2" alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title">Name: {name}</h5>
-                  <p className="card-text">position: {position}</p>
-                  <p className="card-text">country: {country}</p>
-                  <p className="card-text">country: {biography}</p>
+        <div className="col-12">
+          <div className="row d-flex">
+            {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
+            {politicians.map((p) => {
+              const {
+                id,
+                name,
+                dob,
+                country,
+                party,
+                image,
+                position,
+                biography,
+              } = p;
+              return (
+                <div key={id} className="col-3 m-3 card">
+                  <img src={image} className="card-img-top p-2" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">Name: {name}</h5>
+                    <p className="card-text">position: {position}</p>
+                    <p className="card-text">country: {country}</p>
+                    <p className="card-text">biography: {biography}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
