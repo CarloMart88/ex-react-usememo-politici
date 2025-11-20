@@ -1,10 +1,11 @@
 import React, { useState, useEffect, memo, useMemo } from "react";
 import "./App.css";
 // a questo punto creo una componente card
-const Card = ({ p }) => {
+const Card = memo(({ p }) => {
+  console.log("render della card", p.name);
   const { id, name, dob, country, party, image, position, biography } = p;
   return (
-    <div key={id} className="col-3 m-3 card">
+    <div className="col-3 m-3 card">
       <img src={image} className="card-img-top p-2" alt="..." />
       <div className="card-body">
         <h5 className="card-title">Name: {name}</h5>
@@ -14,7 +15,7 @@ const Card = ({ p }) => {
       </div>
     </div>
   );
-};
+});
 /*
 📌 Milestone 3: Ottimizzare il rendering delle card con React.memo
 Attualmente, ogni volta che l’utente digita nella barra di ricerca, tutte le card vengono ri-renderizzate, anche quelle che non sono cambiate.
@@ -75,7 +76,7 @@ function App() {
           <div className="row d-flex">
             {/*ora faccio il map con il destructure prendo le proprietà che mi servono */}
             {filterPoliticians.map((p) => {
-              return <Card p={p} />;
+              return <Card key={p.id} p={p} />;
             })}
           </div>
         </div>
